@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CyberPatriot Scoreboard API Documentation</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+  plugins: [
+    require('@tailwindcss/typography'),
+    ]
+    }
+  </script>
+</head>
+
+<body class="prose w-full px-8 pt-4 py-16 flex flex-col gap-4">
+    <h1 class="my-4 text-3xl font-bold">CyberPatriot Scoreboard API Documentation</h1>
+    <h2 class="my-4 text-2xl font-bold">Introduction</h2>
+    <p>Welcome to the CyberPatriot Scoreboard API documentation. This API provides access to data related to the current
+        CyberPatriot competition, including team information, live data, rankings, and graph data.</p>
+    <h2 class="my-4 text-2xl font-bold">Endpoints</h2>
+    <h3 class="my-4 text-xl font-bold">1. Get Division Data</h3>
+    <h4>Endpoint: <code>/api/divisions</code></h4>
+    <ul>
+        <li><strong>Method</strong>: GET</li>
+        <li><strong>Description</strong>: Get information about the divisions, including open, jrotc, and middle
+            divisions.</li>
+        <li><strong>Response</strong>:<ul>
+                <li><code>last_updated</code>: Timestamp of when the data was last updated.</li>
+                <li><code>results</code>: Total number of teams across all divisions.</li>
+                <li><code>divisions</code>: Division-specific data.</li>
+            </ul>
+        </li>
+    </ul>
+    <h4>Example</h4>
+    <pre><div class="bg-gray-200 text-black rounded-md p-2"><code class="!whitespace-pre hljs language-bash">curl https://cyberpatriots.myphone.education/api/divisions
+</code></div></pre>
+    <h3 class="my-4 text-xl font-bold">2. Get Ranked Teams Data</h3>
+    <h4>Endpoint: <code>/api/ranked</code></h4>
+    <ul>
+        <li><strong>Method</strong>: GET</li>
+        <li><strong>Description</strong>: Get information about ranked teams.</li>
+        <li><strong>Response</strong>:<ul>
+                <li><code>last_updated</code>: Timestamp of when the data was last updated.</li>
+                <li><code>results</code>: Total number of ranked teams.</li>
+                <li><code>ranked</code>: List of ranked teams with their scores.</li>
+            </ul>
+        </li>
+    </ul>
+    <h4>Example</h4>
+    <pre><div class="bg-gray-200 text-black rounded-md p-2"><code class="!whitespace-pre hljs language-bash">curl https://cyberpatriots.myphone.education/api/ranked
+</code></div></div></pre>
+    <h3 class="my-4 text-xl font-bold">3. Get Team Information</h3>
+    <h4>Endpoint: <code>/api/team/&lt;team&gt;</code></h4>
+    <ul>
+        <li><strong>Method</strong>: GET</li>
+        <li><strong>Description</strong>: Get information about a specific team.</li>
+        <li><strong>Parameters</strong>:<ul>
+                <li><code>&lt;team&gt;</code>: Team ID in the format of <code>xx-xxxx</code>.</li>
+            </ul>
+        </li>
+        <li><strong>Response</strong>:<ul>
+                <li>Team information including team number, score, division, tier, state, play time, score time, image
+                    data, and time data.</li>
+            </ul>
+        </li>
+    </ul>
+    <h4>Example</h4>
+    <pre><div class="bg-gray-200 text-black rounded-md p-2"><code class="!whitespace-pre hljs language-bash">curl https://cyberpatriots.myphone.education/api/team/12-3456
+</code></div></div></pre>
+    <h3 class="my-4 text-xl font-bold">4. Get Live Team Data</h3>
+    <h4>Endpoint: <code>/api/live/team/&lt;team&gt;</code></h4>
+    <ul>
+        <li><strong>Method</strong>: GET</li>
+        <li><strong>Description</strong>: Get live data for a specific team during a CyberPatriot competition.</li>
+        <li><strong>Parameters</strong>:<ul>
+                <li><code>&lt;team&gt;</code>: Team ID in the format of <code>xx-xxxx</code>.</li>
+            </ul>
+        </li>
+        <li><strong>Response</strong>:<ul>
+                <li>Live data including team score, division, tier, state, play time, score time, image data, and time
+                    data.</li>
+            </ul>
+        </li>
+    </ul>
+    <h4>Example</h4>
+    <pre><div class="bg-gray-200 text-black rounded-md p-2"><code class="!whitespace-pre hljs language-bash">curl https://cyberpatriots.myphone.education/api/live/team/12-3456
+</code></div></div></pre>
+    <h3 class="my-4 text-xl font-bold">5. Get Tier Data</h3>
+    <h4>Endpoint: <code>/api/tier/&lt;tier&gt;</code></h4>
+    <ul>
+        <li><strong>Method</strong>: GET</li>
+        <li><strong>Description</strong>: Get information about teams in a specific tier (Platinum, Gold, or Silver).
+        </li>
+        <li><strong>Parameters</strong>:<ul>
+                <li><code>&lt;tier&gt;</code>: Tier name (Platinum, Gold, or Silver).</li>
+            </ul>
+        </li>
+        <li><strong>Response</strong>:<ul>
+                <li><code>last_updated</code>: Timestamp of when the data was last updated.</li>
+                <li><code>results</code>: Total number of teams in the specified tier.</li>
+                <li><code>tier</code>: List of teams in the specified tier.</li>
+            </ul>
+        </li>
+    </ul>
+    <h4>Example</h4>
+    <pre><div class="bg-gray-200 text-black rounded-md p-2"><code class="!whitespace-pre hljs language-bash">curl https://cyberpatriots.myphone.education/api/tier/gold
+</code></div></div></pre>
+    <h3 class="my-4 text-xl font-bold">6. Get Linear Graph Data</h3>
+    <h4>Endpoint: <code>/api/graph/linear</code></h4>
+    <ul>
+        <li><strong>Method</strong>: GET</li>
+        <li><strong>Description</strong>: Get linear graph data based on ranked teams' scores.</li>
+        <li><strong>Response</strong>: Image file (PNG) containing the linear graph.</li>
+    </ul>
+    <h4>Example</h4>
+    <pre><div class="bg-gray-200 text-black rounded-md p-2"><code class="!whitespace-pre hljs language-bash">curl https://cyberpatriots.myphone.education/api/graph/linear
+</code></div></div></pre>
+    <h3 class="my-4 text-xl font-bold">7. Get Bell Curve Graph Data</h3>
+    <h4>Endpoint: <code>/api/graph/bell</code></h4>
+    <ul>
+        <li><strong>Method</strong>: GET</li>
+        <li><strong>Description</strong>: Get bell curve graph data based on ranked teams' scores.</li>
+        <li><strong>Response</strong>: Image file (PNG) containing the bell curve graph.</li>
+    </ul>
+    <h4>Example</h4>
+    <pre><div class="bg-gray-200 text-black rounded-md p-2"><code class="!whitespace-pre hljs language-bash">curl https://cyberpatriots.myphone.education/api/graph/bell
+</code></div></div></pre>
+    <h3 class="my-4 text-xl font-bold">8. Get Team Bell Curve Graph Data</h3>
+    <h4>Endpoint: <code>/api/graph/bell/&lt;team&gt;</code></h4>
+    <ul>
+        <li><strong>Method</strong>: GET</li>
+        <li><strong>Description</strong>: Get bell curve graph data with a highlighted line for a specific team's score.
+        </li>
+        <li><strong>Parameters</strong>:<ul>
+                <li><code>&lt;team&gt;</code>: Team ID in the format of <code>xx-xxxx</code>.</li>
+            </ul>
+        </li>
+        <li><strong>Response</strong>: Image file (PNG) containing the bell curve graph with a highlighted line for the
+            specified team.</li>
+    </ul>
+    <h4>Example</h4>
+    <pre><div class="bg-gray-200 text-black rounded-md p-2"><code class="!whitespace-pre hljs language-bash">curl https://cyberpatriots.myphone.education/api/graph/bell/12-3456
+</code></div></div></pre>
+    <h2 class="my-4 text-2xl font-bold">Error Handling</h2>
+    <p>In case of errors, the API will return a JSON response with an <code>error</code> field providing information
+        about the encountered issue.</p>
+    <p><strong>Note:</strong> Data is updated about every 30 minutes.</p>
+</div>
+</body>
